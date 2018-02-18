@@ -1,9 +1,10 @@
-let fs = require('fs')
-let cli = require('cli')
+const fs = require('fs')
+const cli = require('cli')
 
-let findShortestPath = require('./src/findShortestPath')
+const findShortestPath = require('./src/findShortestPath')
+const removeDuplicates = require('./src/arrayUtils').removeDuplicates
 
-const words = fs.readFileSync('dictionary.txt', 'utf8').split('\n')
+let words = fs.readFileSync('dictionary.txt', 'utf8').split('\n')
 
 let params = cli.parse({
   begin: ['begin', 'Begining word', 'string'],
@@ -15,9 +16,10 @@ if (params.begin === null || params.end === null) {
   process.exit(1)
 }
 
+console.log('Input:', params)
+
 let t0 = new Date()
 let result = findShortestPath(words, params.begin, params.end)
-
-console.log('Input:', params)
-console.log(result)
 console.log(`Finished in ${(new Date() - t0) / 1000} seconds`)
+
+console.log(result)

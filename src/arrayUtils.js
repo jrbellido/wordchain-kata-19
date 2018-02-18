@@ -7,6 +7,21 @@ function arrayClone(arr) {
   return arr_clone
 }
 
+function removeDuplicates(a) {
+  const seen = {}
+  const out = []
+  const len = a.length
+  let j = 0
+  for (let i = 0; i < len; i++) {
+    const item = a[i]
+    if (seen[item] !== 1) {
+      seen[item] = 1
+      out[j++] = item
+    }
+  }
+  return out
+}
+
 function removeItem(list, element) {
   for (let i = 0, l = list.length; i < l; i++) {
     if (list[i] === element) {
@@ -39,3 +54,4 @@ exports.removeItem = removeItem
 exports.elementExists = elementExists
 exports.firstElement = firstElement
 exports.lastElement = lastElement
+exports.removeDuplicates = removeDuplicates

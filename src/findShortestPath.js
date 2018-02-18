@@ -2,13 +2,13 @@ const findSmallestUnvisitedNode = require('./findSmallestUnvisitedNode')
 const calculateDistanceToNeighbor = require('./calculateDistanceToNeighbor')
 const findUnvisitedNeighbors = require('./findUnvisitedNeighbors')
 const isGreaterThan = require('./isGreaterThan')
+const removeDuplicates = require('./arrayUtils').removeDuplicates
 const arrayClone = require('./arrayUtils').arrayClone
 const elementExists = require('./arrayUtils').elementExists
 const removeItem = require('./arrayUtils').removeItem
 
 module.exports = function findShortestPath(words, begin, end) {
-  // Remove duplicates and convert to lower case
-  words = [...new Set(words.filter(word => word.length === begin.length).map(word => word.toLowerCase()).map(item => item))]
+  words = removeDuplicates(words.filter(word => word.length === begin.length).map(word => word.toLowerCase()))
 
   if (typeof begin !== 'string' || typeof end !== 'string' || begin.length !== end.length) {
     throw Error('Words are not of the same length')
