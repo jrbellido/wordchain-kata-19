@@ -1,3 +1,5 @@
+const {Seq, Map, Set} = require('immutable')
+
 const assert = require('assert')
 const it = require('mocha').it
 const describe = require('mocha').describe
@@ -8,7 +10,7 @@ const findUnvisitedNeighbors = require('../src/findUnvisitedNeighbors')
 const calculateDistanceToNeighbor = require('../src/calculateDistanceToNeighbor')
 const compareWords = require('../src/compareWords')
 
-const words = [
+const words = new Set([
   'cat',
   'mat',
   'cot',
@@ -27,9 +29,9 @@ const words = [
   'leg',
   'big',
   'log',
-]
+])
 
-const paths = {
+const paths = new Map({
   cat: {distance: 0, prevNode: null},
   mat: {distance: 5, prevNode: 'cat'},
   cot: {distance: 4, prevNode: 'cat'},
@@ -37,7 +39,7 @@ const paths = {
   pot: {distance: 1, prevNode: 'cot'},
   dog: {distance: null, prevNode: null},
   man: {distance: 3, prevNode: 'mat'}
-}
+})
 
 describe('wordchain', () => {
   describe('findShortestPath', () => {
@@ -75,15 +77,15 @@ describe('wordchain', () => {
 
   describe('findSmallestUnvisitedNode', () => {
     it('should return the first unvisited node with the smallest distance', () => {
-      const result = findSmallestUnvisitedNode(paths, ['dog', 'cat', 'man', 'pot'])
+      const result = findSmallestUnvisitedNode(paths, new Seq(['dog', 'cat', 'man', 'pot']))
       assert.equal(result, 'cat')
     })
   })
 
   describe('findUnvisitedNeighbors', () => {
     it('should find all valid neighbors', () => {
-      const result = findUnvisitedNeighbors(words, ['cat', 'dog'], 'dog')
-      assert.deepEqual(result, ['cog', 'dot', 'log'])
+      const result = findUnvisitedNeighbors(words, new Seq(['cat', 'dog']), 'dog')
+      assert.deepEqual(result, new Seq(['cog', 'dot', 'log']))
     })
   })
 

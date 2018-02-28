@@ -1,12 +1,13 @@
+const {Seq, Map, Set} = require('immutable')
+
 const elementExists = require('./arrayUtils').elementExists
 const compareWords = require('./compareWords')
 
 module.exports = function findUnvisitedNeighbors(words, unvisited, a) {
-  let neighbors = []
+  let neighbors = new Seq([])
 
-  for (let n = 0; n < words.length; n++) {
-    if (elementExists(unvisited, a) && compareWords(words[n], a))
-      neighbors.push(words[n])
+  if (unvisited.includes(a)) {
+    return new Seq(words.filter(word => compareWords(word, a)).reverse().toArray())
   }
 
   return neighbors

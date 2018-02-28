@@ -1,11 +1,4 @@
-function arrayClone(arr) {
-  let i, len = arr.length,
-    arr_clone = new Array(len)
-  for (i = 0; i < len; i += 1) {
-    arr_clone[i] = arr[i]
-  }
-  return arr_clone
-}
+const { Map, List } = require('immutable')
 
 function removeDuplicates(a) {
   const seen = {}
@@ -49,7 +42,6 @@ function lastElement(list) {
   return list[list.length - 1]
 }
 
-exports.arrayClone = arrayClone
 exports.removeItem = removeItem
 exports.elementExists = elementExists
 exports.firstElement = firstElement
