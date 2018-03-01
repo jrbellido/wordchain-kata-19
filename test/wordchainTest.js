@@ -45,7 +45,7 @@ describe('wordchain', () => {
   describe('findShortestPath', () => {
     it('should return the shortest path given a known case', () => {
       const result = findShortestPath(words, 'cat', 'dog')
-      assert.equal(result.length, 4)
+      assert.equal(result.size, 4)
     })
   })
 
@@ -77,15 +77,15 @@ describe('wordchain', () => {
 
   describe('findSmallestUnvisitedNode', () => {
     it('should return the first unvisited node with the smallest distance', () => {
-      const result = findSmallestUnvisitedNode(paths, new Seq(['dog', 'cat', 'man', 'pot']))
+      const result = findSmallestUnvisitedNode(paths, new Map({'dog': 1, 'cat': 1, 'man': 1, 'pot': 1}))
       assert.equal(result, 'cat')
     })
   })
 
   describe('findUnvisitedNeighbors', () => {
     it('should find all valid neighbors', () => {
-      const result = findUnvisitedNeighbors(words, new Seq(['cat', 'dog']), 'dog')
-      assert.deepEqual(result, new Seq(['cog', 'dot', 'log']))
+      const result = findUnvisitedNeighbors(words, new Map({'cat': 1, 'dog': 1}), 'dog')
+      assert.deepEqual(result.toArray(), ['cog', 'dot', 'log'])
     })
   })
 

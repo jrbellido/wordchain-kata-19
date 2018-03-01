@@ -2,7 +2,6 @@ const fs = require('fs')
 const cli = require('cli')
 
 const findShortestPath = require('./src/findShortestPath')
-const removeDuplicates = require('./src/arrayUtils').removeDuplicates
 
 let words = fs.readFileSync('dictionary.txt', 'utf8').split('\n')
 
@@ -22,4 +21,4 @@ let t0 = new Date()
 let result = findShortestPath(words, params.begin, params.end)
 console.log(`Finished in ${(new Date() - t0) / 1000} seconds`)
 
-console.log(result)
+console.log('Result:', result.toArray())

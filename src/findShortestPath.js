@@ -4,11 +4,9 @@ const findSmallestUnvisitedNode = require('./findSmallestUnvisitedNode')
 const calculateDistanceToNeighbor = require('./calculateDistanceToNeighbor')
 const findUnvisitedNeighbors = require('./findUnvisitedNeighbors')
 const isGreaterThan = require('./isGreaterThan')
-const removeDuplicates = require('./arrayUtils').removeDuplicates
-const removeItem = require('./arrayUtils').removeItem
 
-module.exports = function findShortestPath(words, begin, end) {
-  words = new Set(removeDuplicates(words.filter(word => word.length === begin.length).map(word => word.toLowerCase())))
+module.exports = function findShortestPath(dictionary, begin, end) {
+  let words = new Map(dictionary.filter(word => word.length === begin.length).map((k, v) => ([k, 1])))
 
   if (typeof begin !== 'string' || typeof end !== 'string' || begin.length !== end.length) {
     throw Error('Words are not of the same length')
@@ -18,12 +16,11 @@ module.exports = function findShortestPath(words, begin, end) {
     throw Error('Please use words from the English dictionary')
   }
 
-  let result = new Set()
   let paths = new Map()
   let visited = new Map()
-  let unvisited = new Map(words.toSeq().map((k, v) => ([k, 1])))
+  let unvisited = words.mapKeys(k => k)
 
-  words.forEach(word => {
+  words.mapKeys(word => {
     paths = paths.set(word, {distance: word === begin ? 0 : null, prevNode: null})
   })
 
@@ -46,14 +43,12 @@ module.exports = function findShortestPath(words, begin, end) {
     visited = visited.set(node, 1)
   }
 
-  let c = paths.get(end)
-  result = result.add(end)
+  let result = new Set([end])
+  let word = paths.get(end)
 
-  for (let i = 0; i < 5; i++) {
-    if (c.prevNode !== null) {
-      result = result.add(c.prevNode)
-      c = paths.get(c.prevNode)
-    }
+  while (word.prevNode !== null) {
+    result = result.add(word.prevNode)
+    word = paths.get(word.prevNode)
   }
 
   return result.reverse()
