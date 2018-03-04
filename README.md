@@ -23,7 +23,7 @@ To run tests:
 First version
 --
 * cat-dog ≈ 17.724 seconds
-* ruby-code ≈ 29509.683 seconds
+* ruby-code ≈ 734.867 seconds
 
 Iteration #1
 --
