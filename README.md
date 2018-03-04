@@ -20,6 +20,11 @@ To run tests:
 
     $ npm test
 
+First version
+--
+* cat-dog ≈ 17.724 seconds
+* ruby-code ≈ 29509.683 seconds
+
 Iteration #1
 --
 Using Immutable.js for some collections and iterating over them.
