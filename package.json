@@ -9,6 +9,7 @@
   "author": "Joan R. Bellido <jrbellido@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "cli": "^1.0.1",
     "immutable": "^4.0.0-rc.12",
     "mocha": "^7.1.2"
   }
